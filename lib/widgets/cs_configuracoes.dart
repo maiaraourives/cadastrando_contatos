@@ -1,8 +1,6 @@
 import 'package:cadastrando_contatos/widgets/cs_icon.dart';
 import 'package:flutter/material.dart';
 
-import '../configs/themes/colors.dart';
-
 class CsConfiguracoes extends StatelessWidget {
   const CsConfiguracoes({
     required this.icon,
@@ -19,9 +17,9 @@ class CsConfiguracoes extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      splashColor: white2,
-      hoverColor: white2,
-      highlightColor: white2,
+      splashColor: const Color.fromRGBO(252, 252, 252, 1),
+      hoverColor: const Color.fromRGBO(252, 252, 252, 1),
+      highlightColor: const Color.fromRGBO(252, 252, 252, 1),
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
         child: Row(
@@ -30,8 +28,8 @@ class CsConfiguracoes extends StatelessWidget {
             const SizedBox(width: 10),
             Text(
               text,
-              style: TextStyle(
-                color: grey,
+              style: const TextStyle(
+                color: Color.fromRGBO(90, 90, 90, 1),
                 fontSize: 17,
                 fontWeight: FontWeight.bold,
                 letterSpacing: 0.5,

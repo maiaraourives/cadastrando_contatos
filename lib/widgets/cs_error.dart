@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '/configs/themes/colors.dart';
-
-
 class CsError extends StatelessWidget {
   const CsError({required this.text, this.image, required this.actions, super.key});
 
@@ -17,12 +14,12 @@ class CsError extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.network( 'https://thecolor.blog/wp-content/uploads/2021/10/GIF-1.gif', width: double.maxFinite, height: 400),
+          Image.network('https://thecolor.blog/wp-content/uploads/2021/10/GIF-1.gif', width: double.maxFinite, height: 400),
           Flexible(
             child: Text(
               text,
               textAlign: TextAlign.center,
-              style:  TextStyle(color: grey, fontSize: 15, fontWeight: FontWeight.bold),
+              style: const TextStyle(color: Color.fromRGBO(90, 90, 90, 1), fontSize: 15, fontWeight: FontWeight.bold),
             ),
           ),
           const SizedBox(height: 20),

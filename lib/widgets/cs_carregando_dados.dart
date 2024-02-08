@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '/configs/themes/colors.dart';
-
 class CsCarregandoDados extends StatelessWidget {
   const CsCarregandoDados({
     this.withMessage = false,
@@ -29,8 +27,8 @@ class CsCarregandoDados extends StatelessWidget {
             Text(
               message ?? 'Carregando Dados',
               textAlign: TextAlign.center,
-              style:  TextStyle(
-                color: red,
+              style: const TextStyle(
+                color: Color.fromRGBO(244, 67, 54, 1),
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),

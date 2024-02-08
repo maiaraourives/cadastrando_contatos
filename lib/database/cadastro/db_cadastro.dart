@@ -1,4 +1,5 @@
-// ignore: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
 
@@ -42,6 +43,7 @@ class DBCadastro {
 
   Future<void> insert(Contato contato) async {
     final Database db = await database;
+
     await db.insert(
       Contato.tableContato,
       contato.toMap(),

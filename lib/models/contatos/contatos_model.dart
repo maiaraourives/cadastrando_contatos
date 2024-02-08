@@ -1,4 +1,5 @@
 class ContatosModel {
+  ContatosModel();
   ContatosModel.fromMapp(Map data) {
     _nome = data['nome'];
     _numero = data['numero'];

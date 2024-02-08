@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '/configs/themes/colors.dart';
-
 class CsTextFormFieldPesquisa<T> extends StatelessWidget {
   const CsTextFormFieldPesquisa({
     this.hintText,
@@ -42,17 +40,17 @@ class CsTextFormFieldPesquisa<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      cursorColor: black,
-      style: TextStyle(color: white),
+      cursorColor: const Color.fromRGBO(0, 0, 0, 1),
+      style: const TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
       decoration: InputDecoration(
-        fillColor: red,
+        fillColor: const Color.fromRGBO(244, 67, 54, 1),
         filled: true,
         hintText: hintText,
-        hintStyle: TextStyle(color: white, fontWeight: FontWeight.w400, letterSpacing: 1),
+        hintStyle: const TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontWeight: FontWeight.w400, letterSpacing: 1),
         suffixIcon: suffixIcon,
         prefixIcon: prefixIcon,
-        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: red), borderRadius: BorderRadius.circular(0)),
-        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: red), borderRadius: BorderRadius.circular(0)),
+        enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: Color.fromRGBO(244, 67, 54, 1)), borderRadius: BorderRadius.circular(0)),
+        focusedBorder: OutlineInputBorder(borderSide: const BorderSide(color: Color.fromRGBO(244, 67, 54, 1)), borderRadius: BorderRadius.circular(0)),
       ),
       onTap: onTap,
       maxLength: maxLength,

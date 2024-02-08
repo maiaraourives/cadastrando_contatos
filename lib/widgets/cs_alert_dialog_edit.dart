@@ -2,7 +2,6 @@ import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '/configs/themes/colors.dart';
 import 'cs_icon.dart';
 import 'cs_text_form_field.dart';
 
@@ -32,7 +31,7 @@ class _CsAlertDialogEditState extends State<CsAlertDialogEdit> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: white,
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       elevation: 5,
       contentPadding: const EdgeInsets.all(0),
       shape: RoundedRectangleBorder(
@@ -59,7 +58,7 @@ class _CsAlertDialogEditState extends State<CsAlertDialogEdit> {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: Color.fromRGBO(255, 255, 255, 1),
                   fontSize: 20,
                 ),
               ),
@@ -107,17 +106,17 @@ class _CsAlertDialogEditState extends State<CsAlertDialogEdit> {
                     children: [
                       Row(
                         children: [
-                          Text('Salvar', style: TextStyle(color: blue, fontSize: 16, fontWeight: FontWeight.w500)),
+                          const Text('Salvar', style: TextStyle(color: Color.fromRGBO(33, 150, 243, 1), fontSize: 16, fontWeight: FontWeight.w500)),
                           TextButton(
                             onPressed: widget.salvar,
-                            child: CsIcon(icon: Icons.check_rounded, color: blue),
+                            child: const CsIcon(icon: Icons.check_rounded, color: Color.fromRGBO(33, 150, 243, 1)),
                           ),
                         ],
                       ),
                       const SizedBox(width: 10),
                       Row(
                         children: [
-                          Text('Deletar', style: TextStyle(color: red, fontSize: 16, fontWeight: FontWeight.w500)),
+                          const Text('Deletar', style: TextStyle(color: Color.fromRGBO(244, 67, 54, 1), fontSize: 16, fontWeight: FontWeight.w500)),
                           TextButton(
                             onPressed: widget.deletar,
                             child: const CsIcon(icon: Icons.delete),

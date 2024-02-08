@@ -50,6 +50,7 @@ dependencies:
   location: ^4.4.0
   open_settings: ^2.0.2
   easy_mask: ^2.0.1
+  faker: ^2.1.0
 
 dev_dependencies:
   flutter_test:

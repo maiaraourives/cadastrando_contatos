@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '/configs/routes/local_routes.dart';
-import '/configs/themes/colors.dart';
 import '/database/cadastro/db_cadastro.dart';
 import '/database/tables/tables_usuario.dart';
 import '/services/navigation_service.dart';
@@ -57,16 +56,55 @@ class _CadastrandoContatosViewState extends State<CadastrandoContatosView> {
   Future<void> _enviar({bool localAuth = false}) async {
     if (localAuth || _formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      if (Contato != '') {
+
+      if (contatos.isNotEmpty) {
+        for (var contato in contatos) {
+          try {
+            if (!isNameValid(contato.nome)) {
+              throw Exception('Nome inválido para o contato ${contato.nome}');
+            }
+
+            if (!isPhoneNumberValid(contato.telefone)) {
+              throw Exception('Número de telefone inválido para o contato ${contato.nome}');
+            }
+
+            if (!isEmailValid(contato.email)) {
+              throw Exception('E-mail inválido para o contato ${contato.nome}');
+            }
+
+          } catch (e) {
+            debugPrint('Erro durante a inserção: $e');
+          }
+        }
+      } else {
+        // Inserir manualmente os dados fornecidos pelo usuário
         var c = Contato(
           nome: nomeController.text,
           telefone: numeroController.text,
           email: emailController.text,
         );
-        dao.insert(c).then((value) {
-          load();
-        });
-        getIt<NavigationService>().pushNamedAndRemoveUntil(LocalRoutes.TELA_INICIAl);
+
+        try {
+          if (!isNameValid(c.nome)) {
+            throw Exception('Nome inválido para o contato ${c.nome}');
+          }
+
+          if (!isPhoneNumberValid(c.telefone)) {
+            throw Exception('Número de telefone inválido para o contato ${c.nome}');
+          }
+
+          if (!isEmailValid(c.email)) {
+            throw Exception('E-mail inválido para o contato ${c.nome}');
+          }
+
+          dao.insert(c).then((value) {
+            load();
+          });
+
+          getIt<NavigationService>().pushNamedAndRemoveUntil(LocalRoutes.TELA_INICIAl);
+        } catch (e) {
+          debugPrint('Erro durante a inserção: $e');
+        }
       }
     }
   }
@@ -74,7 +112,7 @@ class _CadastrandoContatosViewState extends State<CadastrandoContatosView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       appBar: const CsAppBar(title: 'Cadastro de dados'),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 20),
@@ -124,5 +162,22 @@ class _CadastrandoContatosViewState extends State<CadastrandoContatosView> {
         ),
       ),
     );
+  }
+
+  bool isNameValid(String name) {
+    // Adicione sua lógica de validação para o nome, se necessário
+    return RegExp(r'^[a-zA-Z ]+$').hasMatch(name);
+  }
+
+  bool isEmailValid(String email) {
+    // Expressão regular para validar um endereço de e-mail simples
+    RegExp regex = RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    return regex.hasMatch(email);
+  }
+
+  bool isPhoneNumberValid(String phoneNumber) {
+    // Expressão regular para validar um número de telefone simples
+    RegExp regex = RegExp(r'^\(\d{2}\) \d{5}-\d{4}$');
+    return regex.hasMatch(phoneNumber);
   }
 }

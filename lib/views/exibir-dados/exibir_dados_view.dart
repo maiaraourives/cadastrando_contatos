@@ -4,11 +4,10 @@ import 'package:filter_list/filter_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+import '../../widgets/cards/card_exibicao.dart';
 import '/configs/assets/assets_path.dart';
-import '/configs/themes/colors.dart';
 import '/database/cadastro/db_cadastro.dart';
 import '/database/tables/tables_usuario.dart';
-import '/widgets/cards/card_cadastrado_exibição.dart';
 import '/widgets/cs_app_bar.dart';
 import '/widgets/cs_elevated_button.dart';
 import '/widgets/cs_error.dart';
@@ -80,12 +79,12 @@ class ExibirDadosViewState extends State<ExibirDadosView> {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           decoration: BoxDecoration(
-            color: isSelected! ? red : Colors.grey[300]!,
+            color: isSelected! ? const Color.fromRGBO(244, 67, 54, 1) : Colors.grey[300]!,
             borderRadius: BorderRadius.circular(40),
           ),
           child: Text(
             contatos!.nome.toString(),
-            style: TextStyle(color: white, fontWeight: FontWeight.bold, letterSpacing: 1),
+            style: const TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontWeight: FontWeight.bold, letterSpacing: 1),
           ),
         );
       },
@@ -114,12 +113,12 @@ class ExibirDadosViewState extends State<ExibirDadosView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       appBar: CsAppBar(
         title: 'Exibir dados',
         actions: [
           CsIconButton(
-            icon: CsIcon(icon: Icons.search, color: white),
+            icon: const CsIcon(icon: Icons.search, color: Color.fromRGBO(255, 255, 255, 1)),
             onPressed: openFilterDialog,
           ),
         ],
@@ -160,7 +159,7 @@ class ExibirDadosViewState extends State<ExibirDadosView> {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        CardCadastradoExibicao(
+                        CardExibicao(
                           nome: contatos[index].nome,
                           numero: contatos[index].telefone,
                           email: contatos[index].email,

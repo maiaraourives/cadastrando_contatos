@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '/configs/themes/colors.dart';
-
 class CsIcon extends StatelessWidget {
   const CsIcon({
     required this.icon,
@@ -16,7 +14,7 @@ class CsIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color color = this.color ?? red;
+    final Color color = this.color ?? const Color.fromRGBO(244, 67, 54, 1);
 
     return Icon(
       icon,

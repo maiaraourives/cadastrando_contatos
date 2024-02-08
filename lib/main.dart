@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'configs/routes/local_routes.dart';
-import 'configs/themes/colors.dart';
 import 'router_app.dart';
 import 'services/navigation_service.dart';
 import 'services/service_locator.dart';
@@ -54,7 +53,7 @@ class CadastroContatos extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Cadastro de Contatos',
       themeMode: ThemeMode.light,
-      color: white,
+      color: const Color.fromRGBO(255, 255, 255, 1),
       initialRoute: LocalRoutes.SPLASH_SCREEN,
       onGenerateRoute: RouterApp.onGenerateRoute,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,

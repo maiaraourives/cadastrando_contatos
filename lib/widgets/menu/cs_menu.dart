@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '/configs/themes/colors.dart';
 import '/configs/routes/local_routes.dart';
 
 class CsMenu extends StatelessWidget {
@@ -11,8 +10,8 @@ class CsMenu extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [pink, red], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(colors: [Color.fromRGBO(233, 30, 99, 1), Color.fromRGBO(244, 67, 54, 1)], begin: Alignment.bottomCenter, end: Alignment.topCenter),
           ),
         ),
         SafeArea(
@@ -27,7 +26,7 @@ class CsMenu extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 50.0,
-                        backgroundColor: red,
+                        backgroundColor: const Color.fromRGBO(244, 67, 54, 1),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
                           child: const Image(
@@ -39,7 +38,7 @@ class CsMenu extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10.0),
-                      Text('Usuário', style: TextStyle(color: white, fontSize: 17)),
+                      const Text('Usuário', style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1), fontSize: 17)),
                     ],
                   ),
                 ),
@@ -48,31 +47,31 @@ class CsMenu extends StatelessWidget {
                     children: [
                       ListTile(
                         onTap: () {},
-                        trailing: Icon(Icons.home, color: white),
-                        title: Text('Home', style: TextStyle(color: white)),
+                        trailing: const Icon(Icons.home, color: Color.fromRGBO(255, 255, 255, 1)),
+                        title: const Text('Home', style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1))),
                       ),
                       ListTile(
                         onTap: () => Navigator.pushNamed(context, LocalRoutes.CADASTRANDO_CONTATOS),
-                        trailing: Icon(Icons.add, color: white),
-                        title: Text('Cadastro', style: TextStyle(color: white)),
+                        trailing: const Icon(Icons.add, color: Color.fromRGBO(255, 255, 255, 1)),
+                        title: const Text('Cadastro', style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1))),
                       ),
                       ListTile(
                         onTap: () => Navigator.pushNamed(context, LocalRoutes.EDITAR_DADOS),
-                        trailing: Icon(Icons.edit, color: white),
-                        title: Text('Editar', style: TextStyle(color: white)),
+                        trailing: const Icon(Icons.edit, color: Color.fromRGBO(255, 255, 255, 1)),
+                        title: const Text('Editar', style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1))),
                       ),
                       ListTile(
                         onTap: () => Navigator.pushNamed(context, LocalRoutes.EXIBIR_DADOS),
-                        trailing: Icon(Icons.phone_android, color: white),
-                        title: Text('Exibir', style: TextStyle(color: white)),
+                        trailing: const Icon(Icons.phone_android, color: Color.fromRGBO(255, 255, 255, 1)),
+                        title: const Text('Exibir', style: TextStyle(color: Color.fromRGBO(255, 255, 255, 1))),
                       ),
                       ListTile(
                         onTap: () => Navigator.pushNamed(context, LocalRoutes.CONFIGURACOES),
-                        trailing: Icon(Icons.settings, color: white),
-                        title: Text(
+                        trailing: const Icon(Icons.settings, color: Color.fromRGBO(255, 255, 255, 1)),
+                        title: const Text(
                           'Configurações',
                           style: TextStyle(
-                            color: white,
+                            color: Color.fromRGBO(255, 255, 255, 1),
                             fontSize: 15,
                           ),
                         ),

@@ -2,8 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:flutter/material.dart';
 
-import '/configs/themes/colors.dart';
-
 class CsElevatedButton extends StatelessWidget {
   const CsElevatedButton({
     required this.onPressed,
@@ -42,11 +40,9 @@ class CsElevatedButton extends StatelessWidget {
     return Container(
       height: height,
       width: width,
-      decoration:  ShapeDecoration(
-        shape: const StadiumBorder(),
-        gradient: LinearGradient(
-          colors: [red2, pink2],begin: Alignment.topCenter, end: Alignment.bottomCenter
-        ),
+      decoration: const ShapeDecoration(
+        shape: StadiumBorder(),
+        gradient: LinearGradient(colors: [Color.fromARGB(255, 255, 99, 87), Color.fromARGB(255, 238, 73, 128)], begin: Alignment.topCenter, end: Alignment.bottomCenter),
       ),
       child: ElevatedButton.icon(
         onPressed: onPressed,
@@ -54,7 +50,7 @@ class CsElevatedButton extends StatelessWidget {
         clipBehavior: Clip.none,
         label: AutoSizeText(
           label.toUpperCase(),
-          style:  TextStyle(fontSize: 16, color: white, fontWeight: FontWeight.w800),
+          style: const TextStyle(fontSize: 16, color: Color.fromRGBO(255, 255, 255, 1), fontWeight: FontWeight.w800),
         ),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith((_) {
@@ -67,12 +63,11 @@ class CsElevatedButton extends StatelessWidget {
               return theme.backgroundColor;
             }
 
-            return transparent;
+            return Colors.transparent;
           }),
-       
           textStyle: MaterialStateProperty.resolveWith((_) {
             if (outlined) {
-              return  TextStyle(fontSize: 16, color: white, fontWeight: FontWeight.w800);
+              return const TextStyle(fontSize: 16, color: Color.fromRGBO(255, 255, 255, 1), fontWeight: FontWeight.w800);
             }
 
             // ignore: deprecated_member_use

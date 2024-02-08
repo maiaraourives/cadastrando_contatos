@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '/configs/themes/colors.dart';
 import '/configs/assets/assets_path.dart';
 import '/widgets/cs_icon_button.dart';
 import '/widgets/cs_informacoes.dart';
@@ -27,24 +26,26 @@ class CardCadastrado extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: white2,
+      color: Colors.white,
       elevation: 3,
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Stack(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                CsIconButton(
-                  icon: CsIcon(icon: Icons.edit, color: blue),
-                  onPressed: editar,
-                ),
-              ],
+          if (editar != null) ...[
+            Padding(
+              padding: const EdgeInsets.only(top: 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CsIconButton(
+                    icon: const CsIcon(icon: Icons.edit, color: Color.fromRGBO(33, 150, 243, 1)),
+                    onPressed: editar,
+                  ),
+                ],
+              ),
             ),
-          ),
+          ],
           Container(
             margin: const EdgeInsets.all(20),
             child: Row(
@@ -53,9 +54,9 @@ class CardCadastrado extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 50,
-                      backgroundColor: grey,
+                      backgroundColor: const Color.fromRGBO(90, 90, 90, 1),
                       child: CircleAvatar(
-                        backgroundColor: red,
+                        backgroundColor: const Color.fromRGBO(244, 67, 54, 1),
                         radius: 49,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),

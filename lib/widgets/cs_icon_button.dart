@@ -1,4 +1,3 @@
-import 'package:cadastrando_contatos/configs/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 class CsIconButton extends StatelessWidget {
@@ -22,16 +21,16 @@ class CsIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      focusColor: red,
-      highlightColor: red,
+      focusColor: const Color.fromRGBO(244, 67, 54, 1),
+      highlightColor: const Color.fromRGBO(244, 67, 54, 1),
       onPressed: onPressed,
       splashRadius: 20,
       icon: icon,
       alignment: Alignment.center,
       tooltip: tooltip,
       iconSize: 10,
-      splashColor: red,
-      color: blue,
+      splashColor: const Color.fromRGBO(244, 67, 54, 1),
+      color: const Color.fromRGBO(33, 150, 243, 1),
     );
   }
 }

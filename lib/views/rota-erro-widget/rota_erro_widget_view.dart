@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '/configs/themes/colors.dart';
 import '/widgets/cs_app_bar.dart';
 import '/configs/assets/assets_path.dart';
 import '/widgets/cs_error.dart';
@@ -10,17 +9,17 @@ class RotaErrorWidgetView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      
-      appBar: const CsAppBar(
+    return const Scaffold(
+      appBar: CsAppBar(
         title: 'Error',
       ),
-      backgroundColor: white,
-      body: const Center(
+      backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+      body: Center(
         child: SingleChildScrollView(
           child: CsError(
             text: 'Ocorreu um problema desconhecido',
-            image: AssetsPath.ERROR_DATA, actions: [],
+            image: AssetsPath.ERROR_DATA,
+            actions: [],
           ),
         ),
       ),

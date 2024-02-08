@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'configs/routes/local_routes.dart';
-import 'configs/themes/colors.dart';
 import 'views/cadastrando-contatos/cadastrando_contatos_view.dart';
 import 'views/configuracoes/configuracoes_view.dart';
 import 'views/editar-dados/editar_dados_view.dart';
@@ -102,7 +101,7 @@ class _RotaInexistenteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       appBar: const CsAppBar(title: 'Ops! Ocorreu um erro'),
       body: Center(
         child: SingleChildScrollView(

@@ -1,11 +1,9 @@
 // ignore_for_file: unrelated_type_equality_checks
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '/configs/assets/assets_path.dart';
-import '/configs/themes/colors.dart';
 import '/database/cadastro/db_cadastro.dart';
 import '/database/tables/tables_usuario.dart';
 import '/widgets//cs_alert_dialog_edit.dart';
@@ -80,7 +78,7 @@ class EditarDadosViewState extends State<EditarDadosView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: white,
+      backgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       appBar: const CsAppBar(
         title: 'Edição de dados',
       ),
@@ -115,9 +113,8 @@ class EditarDadosViewState extends State<EditarDadosView> {
             children: [
               CsTextFormFieldPesquisa(
                 hintText: 'Digite o contato que deseja excluir',
-                inputFormatters: FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
                 suffixIcon: CsIconButton(
-                  icon: CsIcon(icon: Icons.delete, color: white),
+                  icon: const CsIcon(icon: Icons.delete, color: Color.fromRGBO(255, 255, 255, 1)),
                   onPressed: () {
                     dao.delete(nomeController.text.trim()).then(
                       (c) {
@@ -139,7 +136,7 @@ class EditarDadosViewState extends State<EditarDadosView> {
                           nome: contatos[index].nome,
                           numero: contatos[index].telefone,
                           email: contatos[index].email,
-                          icon: CsIcon(icon: Icons.edit, color: blue),
+                          icon: const CsIcon(icon: Icons.edit, color: Color.fromRGBO(33, 150, 243, 1)),
                           editar: () => setState(
                             () {
                               nomeController.text = contatos[index].nome;

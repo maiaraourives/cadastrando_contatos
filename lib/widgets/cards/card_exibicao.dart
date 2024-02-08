@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '/configs/assets/assets_path.dart';
-import '/configs/themes/colors.dart';
 import '/widgets/cs_informacoes.dart';
 
-class CardCadastradoExibicao extends StatelessWidget {
-  const CardCadastradoExibicao({
+class CardExibicao extends StatelessWidget {
+  const CardExibicao({
     required this.nome,
     required this.numero,
     required this.email,
@@ -23,7 +22,7 @@ class CardCadastradoExibicao extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: white2,
+      color: Colors.white,
       elevation: 3,
       margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -37,9 +36,9 @@ class CardCadastradoExibicao extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 50,
-                      backgroundColor: grey,
+                      backgroundColor: const Color.fromRGBO(90, 90, 90, 1),
                       child: CircleAvatar(
-                        backgroundColor: red,
+                        backgroundColor: const Color.fromRGBO(244, 67, 54, 1),
                         radius: 49,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(100),
