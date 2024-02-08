@@ -1,5 +1,6 @@
 // ignore_for_file: unrelated_type_equality_checks
 
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -23,9 +24,12 @@ class CadastrandoContatosView extends StatefulWidget {
 }
 
 class _CadastrandoContatosViewState extends State<CadastrandoContatosView> {
-  final _nomeController = TextEditingController();
-  final _numeroController = TextEditingController();
-  final _emailController = TextEditingController();
+  final nomeController = TextEditingController();
+  final numeroController = TextEditingController();
+  final emailController = TextEditingController();
+
+  ///[Mask]
+  final telefoneMask = TextInputMask(mask: '(99) 99999-9999');
 
   final _formKey = GlobalKey<FormState>();
 
@@ -43,9 +47,9 @@ class _CadastrandoContatosViewState extends State<CadastrandoContatosView> {
     dao.list().then((value) {
       setState(() {
         contatos = value;
-        _nomeController.text = '';
-        _numeroController.text = '';
-        _emailController.text = '';
+        nomeController.text = '';
+        numeroController.text = '';
+        emailController.text = '';
       });
     });
   }
@@ -55,9 +59,9 @@ class _CadastrandoContatosViewState extends State<CadastrandoContatosView> {
       _formKey.currentState!.save();
       if (Contato != '') {
         var c = Contato(
-          nome: _nomeController.text,
-          telefone: _numeroController.text,
-          email: _emailController.text,
+          nome: nomeController.text,
+          telefone: numeroController.text,
+          email: emailController.text,
         );
         dao.insert(c).then((value) {
           load();
@@ -81,34 +85,36 @@ class _CadastrandoContatosViewState extends State<CadastrandoContatosView> {
               children: [
                 const SizedBox(height: 20),
                 CsTextFormField(
-                  labelText: 'Nome',
+                  label: 'Nome',
                   hintText: 'Insira seu nome',
                   suffixIcon: const CsIcon(icon: Icons.person),
                   keyboardType: TextInputType.name,
                   validator: Validator.nome,
-                  controller: _nomeController,
-                  inputFormatters: FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')),
+                  controller: nomeController,
                 ),
                 const SizedBox(height: 20),
                 CsTextFormField(
-                  labelText: 'Número',
+                  label: 'Número',
                   hintText: 'Insira seu número',
                   suffixIcon: const CsIcon(icon: Icons.phone_android),
                   keyboardType: TextInputType.phone,
                   validator: Validator.numero,
-                  controller: _numeroController,
-                  inputFormatters: FilteringTextInputFormatter.digitsOnly,
+                  controller: numeroController,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                    telefoneMask,
+                  ],
                   maxLength: 20,
                 ),
                 const SizedBox(height: 10),
                 CsTextFormField(
-                  labelText: 'Email',
+                  label: 'Email',
                   hintText: 'Insira seu email',
                   suffixIcon: const CsIcon(icon: Icons.email),
                   keyboardType: TextInputType.emailAddress,
                   validator: Validator.email,
-                  controller: _emailController,
-                  inputFormatters: FilteringTextInputFormatter.singleLineFormatter,
+                  controller: emailController,
+                  inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
                 ),
                 const SizedBox(height: 20),
                 CsElevatedButton(onPressed: _enviar, label: 'Enviar dados'),

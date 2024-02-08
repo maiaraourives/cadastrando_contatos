@@ -42,7 +42,6 @@ dependencies:
   material: ^1.0.0+2
   sqflite: ^2.2.6
   fluttertoast: ^8.2.1
-  progress_hud: ^1.1.0
   path_provider: ^2.0.14
   mask_text_input_formatter: ^2.4.0
   gradient_widgets: ^0.6.0
@@ -50,6 +49,7 @@ dependencies:
   permission_handler: ^10.2.0
   location: ^4.4.0
   open_settings: ^2.0.2
+  easy_mask: ^2.0.1
 
 dev_dependencies:
   flutter_test:

@@ -49,13 +49,13 @@ class DBCadastro {
     );
   }
 
-  Future<void> update(Contato contato) async {
+  Future<void> update(Contato contato, String antigoNome) async {
     final db = await database;
     await db.update(
       Contato.tableContato,
       contato.toMap(),
-      where: "${Contato.columnNome} LIKE '%?%' ",
-      whereArgs: [contato],
+      where: "${Contato.columnNome} = ?",
+      whereArgs: [antigoNome],
     );
   }
 

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cadastrando_contatos/widgets/cs_app_bar.dart';
 import 'package:flutter/material.dart';
 
 import '/configs/themes/colors.dart';
@@ -34,18 +35,7 @@ class _TelaInicialView extends State<TelaInicialView> {
                   ..rotateY((6) * val),
                 child: ClipRRect(
                   child: Scaffold(
-                    appBar: AppBar(
-                      backgroundColor: red,
-                      elevation: 0.0,
-                      toolbarHeight: 70,
-                      title: const FittedBox(
-                        child: Text(
-                          'Tela inicial',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
-                      centerTitle: true,
-                    ),
+                    appBar: const CsAppBar(title: 'Home'),
                     backgroundColor: white,
                     body: Center(
                       child: ListView(
@@ -60,7 +50,7 @@ class _TelaInicialView extends State<TelaInicialView> {
                                   child: const Image(image: NetworkImage('https://thecolor.blog/wp-content/uploads/2021/10/GIF-1.gif'), height: 300, width: 400),
                                 ),
                                 DefaultTextStyle(
-                                  style: TextStyle(fontSize: 25, color: grey, fontWeight: FontWeight.bold, letterSpacing: 1),
+                                  style: const TextStyle(fontSize: 25, color: Colors.blueGrey, fontWeight: FontWeight.bold, letterSpacing: 1),
                                   child: AnimatedTextKit(
                                     animatedTexts: [WavyAnimatedText('Seja Bem-vindo')],
                                     isRepeatingAnimation: true,

@@ -39,7 +39,7 @@ class CsMenu extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 10.0),
-                      Text('Usuário', style: TextStyle(color: white, fontSize: 20.0)),
+                      Text('Usuário', style: TextStyle(color: white, fontSize: 17)),
                     ],
                   ),
                 ),
@@ -69,7 +69,13 @@ class CsMenu extends StatelessWidget {
                       ListTile(
                         onTap: () => Navigator.pushNamed(context, LocalRoutes.CONFIGURACOES),
                         trailing: Icon(Icons.settings, color: white),
-                        title: Text('Configurações', style: TextStyle(color: white, )),
+                        title: Text(
+                          'Configurações',
+                          style: TextStyle(
+                            color: white,
+                            fontSize: 15,
+                          ),
+                        ),
                       ),
                     ],
                   ),

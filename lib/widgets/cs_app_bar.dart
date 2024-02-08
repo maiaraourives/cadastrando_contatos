@@ -1,47 +1,44 @@
 import 'package:flutter/material.dart';
 
-import '/configs/themes/colors.dart';
-
-class CsAppBar extends StatelessWidget with PreferredSizeWidget {
+class CsAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CsAppBar({
     required this.title,
-    this.preferredSize = const Size.fromHeight(65),
-    this.roundedRectangleBorder,
-    this.elevation = 3,
     this.actions,
     this.leading,
+    this.preferredSize = const Size.fromHeight(65),
+    this.elevation = 8,
     super.key,
-    this.color,
   });
 
   @override
   final Size preferredSize;
+
   final String title;
   final List<Widget>? actions;
   final Widget? leading;
   final double elevation;
-  final RoundedRectangleBorder? roundedRectangleBorder;
-  final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    final Color color = this.color ?? Colors.transparent;
     return AppBar(
-      backgroundColor: color,
+      backgroundColor: Colors.transparent,
       elevation: 0.0,
       toolbarHeight: 70,
       title: FittedBox(
         child: Text(
           title,
-          style: const TextStyle(fontSize: 20),
+          style: const TextStyle(fontSize: 20, color: Colors.white),
         ),
       ),
       centerTitle: true,
       flexibleSpace: Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
-          gradient: LinearGradient(colors: [red, pink], begin: Alignment.bottomCenter, end: Alignment.topCenter),
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [Colors.red, Colors.pink], begin: Alignment.bottomCenter, end: Alignment.topCenter),
         ),
+      ),
+      iconTheme: const IconThemeData(
+        color: Colors.white,
+        size: 24,
       ),
       actions: actions,
       leading: leading,

@@ -24,9 +24,9 @@ class ExibirDadosView extends StatefulWidget {
 }
 
 class ExibirDadosViewState extends State<ExibirDadosView> {
-  final _nomeController = TextEditingController();
-  final _numeroController = TextEditingController();
-  final _emailController = TextEditingController();
+  final nomeController = TextEditingController();
+  final numeroController = TextEditingController();
+  final emailController = TextEditingController();
 
   final DBCadastro dao = DBCadastro();
 
@@ -103,9 +103,9 @@ class ExibirDadosViewState extends State<ExibirDadosView> {
       (value) {
         setState(() {
           contatos = value;
-          _nomeController.text = '';
-          _numeroController.text = '';
-          _emailController.text = '';
+          nomeController.text = '';
+          numeroController.text = '';
+          emailController.text = '';
         });
       },
     );

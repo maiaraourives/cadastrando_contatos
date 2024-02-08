@@ -26,9 +26,9 @@ class EditarDadosView extends StatefulWidget {
 }
 
 class EditarDadosViewState extends State<EditarDadosView> {
-  final _nomeController = TextEditingController();
-  final _numeroController = TextEditingController();
-  final _emailController = TextEditingController();
+  final nomeController = TextEditingController();
+  final numeroController = TextEditingController();
+  final emailController = TextEditingController();
 
   final DBCadastro dao = DBCadastro();
 
@@ -70,9 +70,9 @@ class EditarDadosViewState extends State<EditarDadosView> {
     dao.list().then((value) {
       setState(() {
         contatos = value;
-        _nomeController.text = "";
-        _numeroController.text = "";
-        _emailController.text = "";
+        nomeController.text = "";
+        numeroController.text = "";
+        emailController.text = "";
       });
     });
   }
@@ -81,9 +81,8 @@ class EditarDadosViewState extends State<EditarDadosView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
-      appBar: CsAppBar(
+      appBar: const CsAppBar(
         title: 'Edição de dados',
-        color: red,
       ),
       body: Observer(
         builder: (_) {
@@ -120,14 +119,14 @@ class EditarDadosViewState extends State<EditarDadosView> {
                 suffixIcon: CsIconButton(
                   icon: CsIcon(icon: Icons.delete, color: white),
                   onPressed: () {
-                    dao.delete(_nomeController.text.trim()).then(
+                    dao.delete(nomeController.text.trim()).then(
                       (c) {
                         load();
                       },
                     );
                   },
                 ),
-                controller: _nomeController,
+                controller: nomeController,
               ),
               Flexible(
                 child: ListView.builder(
@@ -143,33 +142,32 @@ class EditarDadosViewState extends State<EditarDadosView> {
                           icon: CsIcon(icon: Icons.edit, color: blue),
                           editar: () => setState(
                             () {
-                              _nomeController.text = contatos[index].nome;
-                              _numeroController.text = contatos[index].telefone;
-                              _emailController.text = contatos[index].email;
+                              nomeController.text = contatos[index].nome;
+                              numeroController.text = contatos[index].telefone;
+                              emailController.text = contatos[index].email;
                               showDialog<String>(
                                 context: context,
                                 builder: (_) => CsAlertDialogEdit(
-                                  nome: _nomeController,
-                                  numero: _numeroController,
-                                  email: _emailController,
+                                  nome: nomeController,
+                                  numero: numeroController,
+                                  email: emailController,
                                   salvar: () {
                                     if (contatos != '') {
                                       var c = Contato(
-                                        nome: _nomeController.text,
-                                        telefone: _numeroController.text,
-                                        email: _emailController.text,
+                                        nome: nomeController.text,
+                                        telefone: numeroController.text,
+                                        email: emailController.text,
                                       );
-                                      dao.insert(c).then(
-                                        (value) {
-                                          load();
-                                        },
-                                      );
+
+                                      dao.update(c, contatos[index].nome).then((value) {
+                                        load();
+                                      });
 
                                       Navigator.pop(context);
                                     }
                                   },
                                   deletar: () {
-                                    dao.delete(_nomeController.text.trim()).then(
+                                    dao.delete(nomeController.text.trim()).then(
                                       (c) {
                                         load();
                                         Navigator.pop(context);

@@ -12,9 +12,8 @@ class RotaErrorWidgetView extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Scaffold(
       
-      appBar: CsAppBar(
+      appBar: const CsAppBar(
         title: 'Error',
-        color: red,
       ),
       backgroundColor: white,
       body: const Center(
