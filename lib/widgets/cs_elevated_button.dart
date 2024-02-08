@@ -42,7 +42,7 @@ class CsElevatedButton extends StatelessWidget {
       width: width,
       decoration: const ShapeDecoration(
         shape: StadiumBorder(),
-        gradient: LinearGradient(colors: [Color.fromARGB(255, 255, 99, 87), Color.fromARGB(255, 238, 73, 128)], begin: Alignment.topCenter, end: Alignment.bottomCenter),
+        gradient: LinearGradient(colors: [Colors.red, Colors.pink], begin: Alignment.topCenter, end: Alignment.bottomCenter),
       ),
       child: ElevatedButton.icon(
         onPressed: onPressed,
@@ -65,6 +65,18 @@ class CsElevatedButton extends StatelessWidget {
 
             return Colors.transparent;
           }),
+          shadowColor: MaterialStateProperty.resolveWith((_) {
+            if (backgroundColor != null) {
+              return backgroundColor;
+            }
+
+            if (outlined) {
+              // ignore: deprecated_member_use
+              return theme.backgroundColor;
+            }
+
+            return Colors.transparent;
+          }),
           textStyle: MaterialStateProperty.resolveWith((_) {
             if (outlined) {
               return const TextStyle(fontSize: 16, color: Color.fromRGBO(255, 255, 255, 1), fontWeight: FontWeight.w800);
@@ -73,7 +85,7 @@ class CsElevatedButton extends StatelessWidget {
             // ignore: deprecated_member_use
             return theme.textTheme.button;
           }),
-          elevation: MaterialStateProperty.all(2),
+          // elevation: MaterialStateProperty.all(2),
           shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
         ),
       ),

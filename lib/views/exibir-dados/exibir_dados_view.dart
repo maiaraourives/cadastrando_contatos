@@ -1,18 +1,17 @@
-// ignore_for_file: unrelated_type_equality_checks
-
 import 'package:filter_list/filter_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../widgets/cards/card_exibicao.dart';
-import '/configs/assets/assets_path.dart';
-import '/database/cadastro/db_cadastro.dart';
-import '/database/tables/tables_usuario.dart';
-import '/widgets/cs_app_bar.dart';
-import '/widgets/cs_elevated_button.dart';
-import '/widgets/cs_error.dart';
-import '/widgets/cs_icon.dart';
-import '/widgets/cs_icon_button.dart';
+import '../../widgets/cs_header.dart';
+import '../../configs/assets/assets_path.dart';
+import '../../database/cadastro/db_cadastro.dart';
+import '../../database/tables/tables_usuario.dart';
+import '../../widgets/cs_app_bar.dart';
+import '../../widgets/cs_elevated_button.dart';
+import '../../widgets/cs_error.dart';
+import '../../widgets/cs_icon.dart';
+import '../../widgets/cs_icon_button.dart';
 import 'exibir_dados_state.dart';
 
 class ExibirDadosView extends StatefulWidget {
@@ -30,6 +29,8 @@ class ExibirDadosViewState extends State<ExibirDadosView> {
   final DBCadastro dao = DBCadastro();
 
   List<Contato> contatos = [];
+
+  // List<Contato> contatosComErro = []; // List to store contacts with errors
 
   final _stateView = ExibirDadosState();
 
@@ -55,6 +56,13 @@ class ExibirDadosViewState extends State<ExibirDadosView> {
     } finally {
       _stateView.setLoadingData(value: false);
     }
+    //  try {
+    //   contatosComErro = await dao.insertBatchWithErrors(); // Fetch contacts with errors
+    // } catch (err) {
+    //   _stateView.setError(value: true);
+    // } finally {
+    //   _stateView.setLoadingData(value: false);
+    // }
   }
 
   void openFilterDialog() async {
@@ -152,8 +160,10 @@ class ExibirDadosViewState extends State<ExibirDadosView> {
 
           return Column(
             children: [
-              Flexible(
+              const CsHeader(title: 'Lista de contatos'),
+              Expanded(
                 child: ListView.builder(
+                  padding: const EdgeInsets.only(bottom: 20),
                   shrinkWrap: true,
                   itemCount: contatos.length,
                   itemBuilder: (context, index) {
@@ -168,7 +178,26 @@ class ExibirDadosViewState extends State<ExibirDadosView> {
                     );
                   },
                 ),
-              )
+              ),
+              // const CsHeader(title: 'Lista de contatos com erro'),
+              // //Contatos com erro
+              // Expanded(
+              //   child: ListView.builder(
+              //     shrinkWrap: true,
+              //     itemCount: contatosComErro.length,
+              //     itemBuilder: (context, index) {
+              //       return Column(
+              //         children: [
+              //           CardExibicao(
+              //             nome: contatosComErro[index].nome,
+              //             numero: contatosComErro[index].telefone,
+              //             email: contatosComErro[index].email,
+              //           ),
+              //         ],
+              //       );
+              //     },
+              //   ),
+              // ),
             ],
           );
         },

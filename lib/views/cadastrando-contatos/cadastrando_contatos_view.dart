@@ -4,15 +4,15 @@ import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '/configs/routes/local_routes.dart';
-import '/database/cadastro/db_cadastro.dart';
-import '/database/tables/tables_usuario.dart';
-import '/services/navigation_service.dart';
-import '/services/service_locator.dart';
-import '/widgets/cs_app_bar.dart';
-import '/widgets/cs_elevated_button.dart';
-import '/widgets/cs_icon.dart';
-import '/widgets/cs_text_form_field.dart';
+import '../../configs/routes/local_routes.dart';
+import '../../database/cadastro/db_cadastro.dart';
+import '../../database/tables/tables_usuario.dart';
+import '../../services/navigation_service.dart';
+import '../../services/service_locator.dart';
+import '../../widgets/cs_app_bar.dart';
+import '../../widgets/cs_elevated_button.dart';
+import '../../widgets/cs_icon.dart';
+import '../../widgets/cs_text_form_field.dart';
 import 'cadastrando_contatos_validator.dart';
 
 class CadastrandoContatosView extends StatefulWidget {
@@ -37,9 +37,16 @@ class _CadastrandoContatosViewState extends State<CadastrandoContatosView> {
   List<Contato> contatos = [];
 
   _CadastrandoContatosViewState() {
-    dao.connect().then((value) {
-      load();
+    // Move the database connection logic to the initState method
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      connectToDatabase();
     });
+  }
+
+  // Connect to the database in initState
+  void connectToDatabase() async {
+    await dao.connect();
+    load();
   }
 
   load() {
@@ -53,58 +60,52 @@ class _CadastrandoContatosViewState extends State<CadastrandoContatosView> {
     });
   }
 
-  Future<void> _enviar({bool localAuth = false}) async {
+  Future<void> testeErros() async {
+    DBCadastro dao = DBCadastro();
+
+    await dao.connect();
+
+    List<Contato> contatos = List.generate(2, (index) {
+      if (index % 2 == 0) {
+        return Contato(
+          nome: 'Dona $index',
+          telefone: '12 3456 7890',
+          email: 'doninha$index@example.com',
+        );
+      } else {
+        return Contato(
+          nome: 'Luana Di Paula',
+          telefone: '(22) 99904-4863',
+          email: 'luana@gmail.com',
+        );
+      }
+    });
+
+    void handleErrors(List<Contato> registrosComErro) {
+      debugPrint('Registros com erro:');
+      for (var contato in registrosComErro) {
+        debugPrint('${contato.nome}, ${contato.telefone}, ${contato.email}');
+      }
+    }
+
+    await dao.insertBatch(contatos, handleErrors);
+  }
+
+  Future<void> enviar({bool localAuth = false}) async {
     if (localAuth || _formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-
-      if (contatos.isNotEmpty) {
-        for (var contato in contatos) {
-          try {
-            if (!isNameValid(contato.nome)) {
-              throw Exception('Nome inválido para o contato ${contato.nome}');
-            }
-
-            if (!isPhoneNumberValid(contato.telefone)) {
-              throw Exception('Número de telefone inválido para o contato ${contato.nome}');
-            }
-
-            if (!isEmailValid(contato.email)) {
-              throw Exception('E-mail inválido para o contato ${contato.nome}');
-            }
-
-          } catch (e) {
-            debugPrint('Erro durante a inserção: $e');
-          }
-        }
-      } else {
-        // Inserir manualmente os dados fornecidos pelo usuário
+      if (Contato != '') {
         var c = Contato(
           nome: nomeController.text,
           telefone: numeroController.text,
           email: emailController.text,
         );
 
-        try {
-          if (!isNameValid(c.nome)) {
-            throw Exception('Nome inválido para o contato ${c.nome}');
-          }
+        dao.insert(c).then((value) {
+          load();
+        });
 
-          if (!isPhoneNumberValid(c.telefone)) {
-            throw Exception('Número de telefone inválido para o contato ${c.nome}');
-          }
-
-          if (!isEmailValid(c.email)) {
-            throw Exception('E-mail inválido para o contato ${c.nome}');
-          }
-
-          dao.insert(c).then((value) {
-            load();
-          });
-
-          getIt<NavigationService>().pushNamedAndRemoveUntil(LocalRoutes.TELA_INICIAl);
-        } catch (e) {
-          debugPrint('Erro durante a inserção: $e');
-        }
+        getIt<NavigationService>().pushNamedAndRemoveUntil(LocalRoutes.TELA_INICIAl);
       }
     }
   }
@@ -155,29 +156,14 @@ class _CadastrandoContatosViewState extends State<CadastrandoContatosView> {
                   inputFormatters: [FilteringTextInputFormatter.singleLineFormatter],
                 ),
                 const SizedBox(height: 20),
-                CsElevatedButton(onPressed: _enviar, label: 'Enviar dados'),
+                CsElevatedButton(onPressed: enviar, label: 'Enviar dados'),
+                const SizedBox(height: 20),
+                CsElevatedButton(onPressed: testeErros, label: 'Teste de Erros'),
               ],
             ),
           ),
         ),
       ),
     );
-  }
-
-  bool isNameValid(String name) {
-    // Adicione sua lógica de validação para o nome, se necessário
-    return RegExp(r'^[a-zA-Z ]+$').hasMatch(name);
-  }
-
-  bool isEmailValid(String email) {
-    // Expressão regular para validar um endereço de e-mail simples
-    RegExp regex = RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
-    return regex.hasMatch(email);
-  }
-
-  bool isPhoneNumberValid(String phoneNumber) {
-    // Expressão regular para validar um número de telefone simples
-    RegExp regex = RegExp(r'^\(\d{2}\) \d{5}-\d{4}$');
-    return regex.hasMatch(phoneNumber);
   }
 }

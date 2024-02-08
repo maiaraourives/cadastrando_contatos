@@ -44,3 +44,20 @@ String valorNull(String? value, [String? pattern]) {
 
   return value;
 }
+
+bool isNameValid(String name) {
+  // Adicione sua lógica de validação para o nome, se necessário
+  return RegExp(r'^[a-zA-Z ]+$').hasMatch(name);
+}
+
+bool isEmailValid(String email) {
+  // Expressão regular para validar um endereço de e-mail simples
+  RegExp regex = RegExp(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+  return regex.hasMatch(email);
+}
+
+bool isPhoneNumberValid(String phoneNumber) {
+  // Expressão regular para validar um número de telefone simples
+  RegExp regex = RegExp(r'^\(\d{2}\) \d{5}-\d{4}$');
+  return regex.hasMatch(phoneNumber);
+}
